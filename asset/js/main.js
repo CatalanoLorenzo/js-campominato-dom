@@ -6,11 +6,9 @@ Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed 
 
 const play_button = document.getElementById('play_button')
 const row_grill = document.getElementById('row_grill')
-const select_level = document.getElementById('level')
 const stylepage = document.styleSheets[5]
-let number_of_cells
+
 let click = true
-let difficulty = select_level.value
 const number_of_bomb = 16
 
 console.log(click);
@@ -18,20 +16,11 @@ console.log(click);
 //all'interno della riga con all'interno un paragrafo col numero corispettivo e anche una clesse
 
 play_button.addEventListener('click', function () {
+    const select_level = Number(document.getElementById('level').value)
+    let number_of_cells = select_level
     //----------cicle of game---------------
-    if (click) {
+
         row_grill.innerHTML = ''
-
-        //----------------- selctor level--------------------
-        console.log(difficulty)
-        if (difficulty == 'hard') {
-            number_of_cells = 17
-
-        } else if (difficulty == 'normal') {
-            number_of_cells = 81
-        } else {
-            number_of_cells = 100
-        }
         console.log(number_of_cells)
         //----------------- generetor of bombs ---------------
         const bombs = []
@@ -65,43 +54,42 @@ play_button.addEventListener('click', function () {
         }
         //-------------------selector of cells----------------------
         const cell = document.querySelectorAll('.col')
-        let numbers_select = 0
         let cell_free = number_of_cells - number_of_bomb
         console.log(cell_free);
         for (let i = 0; i < cell.length - 1; i++) {
-
-
-
+            
+            
+            
             cell[i].addEventListener('click', function () {
                 let number_select = Number(cell[i].innerText)
-
-                if (bombs.includes(number_select)) {
+                let numbers_select = 0
+                if (bombs.includes(number_select) ) {
                     cell[i].classList.add('done')
-                    console.log(`il numero ${number_select} è stato scelto dal pc`)
+                    setTimeout(() =>{
+                        location.reload()
+                    },10000)
+                    alert(`il numero ${number_select} è stato scelto dal pc`)
                     row_grill.innerHTML = `Hai perso numero di blocchi trovati ${numbers_select}/${cell_free} `
                     click = true
-
-                } else {
-                    while (numbers_select < cell_free) {
+                }else if (numbers_select == cell_free){
+                    row_grill.innerHTML = 'Hai vinto'
+                    
+                }
+                console.log(numbers_select)
+                if (!cell[i].classList.contains('done') || !cell[i].classList.contains('select') ){
+                   
                         cell[i].classList.add('select')
                         numbers_select++
                         console.log(number_select)
                         console.log(numbers_select)
                     }
-
-                    row_grill.innerHTML = 'Hai vinto'
-                    click = true
-
-                }
+                
+                
 
             })
 
 
         }
 
-        console.log(click)
-        click = false
-    } else {
-        alert('partita ancora in corso...')
-    }
+    
 })
