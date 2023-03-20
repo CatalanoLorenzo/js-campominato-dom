@@ -78,7 +78,7 @@ play_button.addEventListener('click', function () {
                 if (bombs.includes(number_select)) {
                     cell[i].classList.add('done')
                     console.log(`il numero ${number_select} è stato scelto dal pc`)
-                    row_grill.innerHTML = 'Hai perso'
+                    row_grill.innerHTML = `Hai perso numero di blocchi trovati ${numbers_select}/${cell_free} `
                     click = true
 
                 } else {
@@ -90,6 +90,7 @@ play_button.addEventListener('click', function () {
                     }
 
                     row_grill.innerHTML = 'Hai vinto'
+                    click = true
 
                 }
 
