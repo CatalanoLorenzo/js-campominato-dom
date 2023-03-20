@@ -25,7 +25,7 @@ play_button.addEventListener('click', function () {
         //----------------- selctor level--------------------
         console.log(difficulty)
         if (difficulty == 'hard') {
-            number_of_cells = 49
+            number_of_cells = 17
 
         } else if (difficulty == 'normal') {
             number_of_cells = 81
@@ -37,18 +37,11 @@ play_button.addEventListener('click', function () {
         const bombs = []
         while (bombs.length <= number_of_bomb - 1) {
             let bombs_number = Math.floor(Math.random() * number_of_cells + 1)
-
-            for (let i = 1; i < bombs.length; i++) {
-                if (bombs_number == bombs[i]) {
-                    bombs_number = Math.floor(Math.random() * number_of_cells + 1)
-                    i = 1
-                } else {
-                    bombs.push(bombs_number)
-                }
+            if (bombs.includes(bombs_number)) {
+                bombs_number = Math.floor(Math.random() * number_of_cells + 1)
+            } else {
+                bombs.push(bombs_number)
             }
-
-            bombs.push(bombs_number)
-
         }
         console.log(bombs)
 
@@ -72,13 +65,39 @@ play_button.addEventListener('click', function () {
         }
         //-------------------selector of cells----------------------
         const cell = document.querySelectorAll('.col')
+        let numbers_select = 0
+        let cell_free = number_of_cells - number_of_bomb
+        console.log(cell_free);
         for (let i = 0; i < cell.length - 1; i++) {
+
+
+
             cell[i].addEventListener('click', function () {
-                console.log(Number(cell[i].innerText))
-                cell[i].classList.add('select')
+                let number_select = Number(cell[i].innerText)
+
+                if (bombs.includes(number_select)) {
+                    cell[i].classList.add('done')
+                    console.log(`il numero ${number_select} è stato scelto dal pc`)
+                    row_grill.innerHTML = 'Hai perso'
+                    click = true
+
+                } else {
+                    while (numbers_select < cell_free) {
+                        cell[i].classList.add('select')
+                        numbers_select++
+                        console.log(number_select)
+                        console.log(numbers_select)
+                    }
+
+                    row_grill.innerHTML = 'Hai vinto'
+
+                }
+
             })
 
+
         }
+
         console.log(click)
         click = false
     } else {

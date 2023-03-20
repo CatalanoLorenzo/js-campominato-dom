@@ -13,6 +13,9 @@ main {
 .select{
     background-color: azure;
 }
+.done{
+    background-color: red;
+}
 .square{
     width: calc(100% / 10);
     aspect-ratio: 1/1;
