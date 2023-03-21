@@ -122,7 +122,7 @@ play_button.addEventListener('click', function () {
         // aggiunge una classe alla cella (colore di sfondo rosso)
         cell[i].classList.add('done')
         // e gli inserisci l'emoji' b
-        cell[i].textContent = '💣'}
+        cell[i].textContent = '💣'
         // prende tutti i 'div' con classe col 
         const cell_el = document.querySelectorAll('.col')
         // crea un ciclo per segnare tutte le bombe restanti
@@ -138,8 +138,8 @@ play_button.addEventListener('click', function () {
             // e gli inserisci l'emoji' b
             cell.textContent = '💣'}
         }
-        
-    }
+    }   
+
 
     function case_of_ingame(numbers_select, cell, i) {
         
